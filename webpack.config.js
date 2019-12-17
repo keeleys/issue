@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -22,6 +22,10 @@ module.exports = {
           "postcss-loader",
           "sass-loader"
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
       },
       {
         test: /\.(png|svg|jpg|gif|jpeg)$/,
@@ -54,9 +58,10 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title:"note-book",
-      'meta': {
-        'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no'
+      title: "note-book",
+      template: "./src/html.template",
+      meta: {
+        viewport: "width=device-width, initial-scale=1, shrink-to-fit=no"
       }
     })
   ],

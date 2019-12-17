@@ -1,13 +1,16 @@
 import Vue from 'vue'
-import Index from './components/home/Index.vue'
+import { router } from './route'
 
 import './css/main.scss';
+import "github-markdown-css"
+
 import store from './store'
 
-var div = document.createElement("div");
-document.body.appendChild(div);
+import App from "./components/app";
 
-var app = new Vue({
+console.log('[i] Starting client app')
+const app = new Vue({
     store,
-    render: (createEl) => createEl(Index)
-}).$mount(div);
+    router,
+    render: c => c(App)
+}).$mount('#app');

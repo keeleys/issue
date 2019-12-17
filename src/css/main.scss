@@ -27,9 +27,11 @@ main {
   display: flex;
   max-width: var(--content-width);
   margin: 20px auto 0px auto;
-  article {
+  > div, >article{
     flex: auto;
     margin-left: 5px;
+  }
+  article {
     section {
       display: flex;
       align-items: center;
