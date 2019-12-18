@@ -1,0 +1,26 @@
+.detail {
+  .header {
+    padding: 10px;
+    font-size: 15px;
+    line-height: 120%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: auto;
+  }
+  .cell {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 120%;
+    text-align: left;
+  }
+  .commit_login {
+    background: #e2e2e2;
+    padding: 10px;
+    border-radius: 5px;
+  }
+}
+a:active, a:link, a:visited {
+    color: #778087;
+    text-decoration: none;
+    word-break: break-word;
+  }

@@ -36,25 +36,28 @@
   z-index: 200;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 // 内容层 z-index要比遮罩大，否则会被遮盖，
 .dialog-content {
   position: fixed;
-  top: 35%;
-  width: 86.5%;
-  left: 6.5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 40vw;
+  height: 60vh;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
   z-index: 300;
   background: #fff;
   .dialog_head {
-    background: #2e2c2d;
-    color: #fff;
-    flex: auto;
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .dialog_main {
+    padding: 10px 20px;
   }
 }
 </style>
@@ -66,33 +69,6 @@ export default {
       type: Boolean,
       default: false,
       required: true //必须
-    },
-    //下面这些属性会绑定到div上面 详情参照上面的html结构
-    // 如： :style="{top:topDistance+'%',width:widNum+'%'}"
-    widNum: {
-      //内容宽度
-      type: Number,
-      default: 86.5
-    },
-    leftSite: {
-      // 左定位
-      type: Number,
-      default: 6.5
-    },
-    topDistance: {
-      //top上边距
-      type: Number,
-      default: 35
-    },
-    pdt: {
-      //上padding
-      type: Number,
-      default: 22
-    },
-    pdb: {
-      //下padding
-      type: Number,
-      default: 47
     }
   },
   methods: {

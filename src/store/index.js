@@ -7,11 +7,15 @@ const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   state: {
-    showDialog: false
+    showDialog: false,
+    loading: false
   },
   mutations: {
     setShowDialog: function(state, showDialog) {
       state.showDialog = showDialog;
+    },
+    isLoading: function(state, flag) {
+      state.loading = flag;
     }
   },
   modules: {

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Index from "./components/home/Index";
-import Detail from "./components/home/detail";
+import Index from "@/components/home/Index";
+import Detail from "@/components/home/Detail";
 
 Vue.use(VueRouter);
 

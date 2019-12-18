@@ -1,12 +1,15 @@
 import Vue from 'vue'
-import { router } from './route'
-
-import './css/main.scss';
 import "github-markdown-css"
+import '@/css/main.scss';
 
-import store from './store'
+import App from "@/components/App";
 
-import App from "./components/app";
+import store from '@/store'
+import { router } from '@/route'
+
+import components from "@/components/components"
+
+Vue.use(components)
 
 console.log('[i] Starting client app')
 const app = new Vue({
