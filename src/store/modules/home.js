@@ -2,7 +2,13 @@ import github from "@/image/github.svg";
 import weixin from "@/image/weixin.svg";
 import weibo from "@/image/weibo.svg";
 import facebook from "@/image/facebook.svg";
-import { getAllIssues, getSingleIssue, getSingleIssueCommits, convertMarkdown} from "@/util/api";
+import {
+  getAllIssues,
+  getSingleIssue,
+  getSingleIssueCommits,
+  convertMarkdown,
+  createIssue
+} from "@/util/api";
 const state = {
   issues: [],
   issue: {},
@@ -15,8 +21,11 @@ const mutations = {
   setIssue: function(state, issue) {
     state.issue = issue;
   },
-  setCommits: function(state, commits){
+  setCommits: function(state, commits) {
     state.commits = commits;
+  },
+  insertIssue: function(state,issue) {
+    state.issues.unshift(issue);
   }
 };
 const actions = {
@@ -50,6 +59,11 @@ const actions = {
       commit.bodyHtml = bodyHtml.data;
     }
     context.commit("setCommits", commits.data);
+  },
+  async insertIssue(context, payload) {
+    let data = { "labels": ['blog'], ...payload }
+    let result = await createIssue(payload);
+    context.commit("insertIssue", result.data);
   }
 };
 const getters = {

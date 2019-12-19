@@ -30,6 +30,11 @@ export const getSingleIssueCommits = issue_number => {
   const headers = getHeaders();
   return axiosGithub.get(GET_SINGLE_ISSUES, { headers });
 };
+export const createIssue = payload => {
+  const creaetIssueUrl = `/repos/${config.resp}/issues`;
+  const headers = getHeaders();
+  return axiosGithub.post(creaetIssueUrl, payload, { headers });
+}
 
 export const accessToken = payload => {
   const accessTokenUrl =

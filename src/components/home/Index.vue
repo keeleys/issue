@@ -36,15 +36,33 @@
   <Dialog :is-show="showDialog" @on-close="closeDialog">
       <div slot="header">创建新主题</div>
       <div slot="main">
-        请输入内容
+        <div id="dialog_title">
+          <input type="text" name="title" placeholder="请输入标题" v-model="model.title"/>
+        </div>
+        <div class="spe20"></div>
+        <div id="dialog_body">
+          <textarea name="body" placeholder="请输入内容" v-model="model.body"></textarea>
+        </div>
+      <div>
+        <button @click="saveIssue">发布</button>
+      </div>
       </div>
     </Dialog>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
+import { log } from 'util';
 export default {
   name: "index",
+  data() {
+    return {
+      model : {
+        title: null,
+        body: null
+      }
+    }
+  },
   computed: {
     showDialog() {
       return this.$store.state.showDialog;
@@ -60,6 +78,15 @@ export default {
     },
     openDetail(number) {
       this.$router.push({ path: `/detail/${number}` });
+    },
+    async saveIssue() {
+      this.$store.commit("isLoading", true);
+      await this.$store.dispatch("home/insertIssue", {
+        title: this.model.title,
+        body: this.model.body
+      });
+      this.$store.commit("isLoading", false);
+      this.closeDialog();
     }
   },
   async mounted() {

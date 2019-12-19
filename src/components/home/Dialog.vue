@@ -43,12 +43,11 @@
 .dialog-content {
   position: fixed;
   width: 40vw;
-  height: 60vh;
+  height: auto;
   margin:auto;
   left:0;
   right:0;
-  top:0;
-  bottom:0;
+  top:5vh;
   z-index: 300;
   background: #fff;
   .dialog_head {
