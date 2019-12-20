@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import "github-markdown-css"
 import '@/css/main.scss';
+import '@/util/vue_filter';
 
 import App from "@/components/App";
 

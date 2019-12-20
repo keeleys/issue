@@ -37,6 +37,11 @@ main {
       display: flex;
       align-items: center;
       padding: 10px;
+      .avatar {
+        img {
+          max-height: 50px;
+        }
+      }
       .middle {
         margin: 5px 10px;
         flex: auto;
@@ -70,16 +75,16 @@ main {
       }
       .commit {
         line-height: 12px;
-        font-weight: 700;
         color: #fff;
-        background-color: #999;
+        background-color: #14173fa1;
         display: inline-block;
         padding: 3px 10px;
-        -moz-border-radius: 12px;
-        -webkit-border-radius: 12px;
-        border-radius: 12px;
+        border-radius: 3px;
         text-decoration: none;
         margin-right: 5px;
+      }
+      button {
+        padding: 5px 20px;
       }
     }
   }
@@ -124,6 +129,7 @@ a {
   border-radius: var(--box-border-radius);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid #e2e2e2;
+  padding: 0px 2px;
 }
 .fade-enter,
 .fade-leave-active {

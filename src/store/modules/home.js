@@ -1,13 +1,10 @@
-import github from "@/image/github.svg";
-import weixin from "@/image/weixin.svg";
-import weibo from "@/image/weibo.svg";
-import facebook from "@/image/facebook.svg";
 import {
   getAllIssues,
   getSingleIssue,
   getSingleIssueCommits,
   convertMarkdown,
-  createIssue
+  createIssue,
+  updateIssue
 } from "@/util/api";
 const state = {
   issues: [],
@@ -18,58 +15,38 @@ const mutations = {
   setIssues: function(state, issues) {
     state.issues = issues;
   },
-  setIssue: function(state, issue) {
-    state.issue = issue;
+  updateIssue: function(state, issue) {
+    const index = state.issues.findIndex(it => it.id === issue.id);
+    if (index !== -1) {
+      state.issues[index] = issue;
+    }
   },
-  setCommits: function(state, commits) {
-    state.commits = commits;
+  remoteIssue: function(state, id) {
+    state.issues = state.issues.filter(function(issue) {
+      return issue.id === id;
+    });
   },
-  insertIssue: function(state,issue) {
+  insertIssue: function(state, issue) {
     state.issues.unshift(issue);
   }
 };
 const actions = {
   async findAllIssues(context) {
     let issues = await getAllIssues();
-    issues = issues.data.map(issue => {
-      return {
-        number: issue.number,
-        user_name: issue.user.login,
-        title: issue.title,
-        labels: issue.labels,
-        state: issue.state,
-        locked: issue.locked,
-        comments: issue.comments,
-        created_at: issue.created_at,
-        updated_at: issue.updated_at
-      };
-    });
-    context.commit("setIssues", issues);
-  },
-  async getSingleIssue(context, num) {
-    let issue = await getSingleIssue(num);
-    let bodyHtml = await convertMarkdown(issue.data.body);
-    issue.data.bodyHtml = bodyHtml.data;
-    context.commit("setIssue", issue.data);
-  },
-  async getSingleIssueCommits(context, num) {
-    let commits = await getSingleIssueCommits(num);
-    for (const commit of commits.data) {
-      let bodyHtml = await convertMarkdown(commit.body);
-      commit.bodyHtml = bodyHtml.data;
-    }
-    context.commit("setCommits", commits.data);
+    context.commit("setIssues", issues.data);
   },
   async insertIssue(context, payload) {
-    let data = { "labels": ['blog'], ...payload }
+    let data = { labels: ["documentation"], ...payload };
     let result = await createIssue(payload);
     context.commit("insertIssue", result.data);
-  }
-};
-const getters = {
-  issues(state) {
-    console.log("getter");
-    return state.issues;
+  },
+  async updateIssue(context, payload) {
+    let result = await updateIssue(payload);
+    context.commit("updateIssue", result.data);
+  },
+  async deleteIssue(context, number) {
+    let result = await updateIssue({ number, state: "closed"});
+    context.commit("remoteIssue", result.data);
   }
 };
 export default {

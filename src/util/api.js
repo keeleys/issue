@@ -14,28 +14,42 @@ const axiosGithub = axios.create({
 });
 
 export const getAllIssues = () => {
-  const GET_ALL_ISSUES = `/repos/${config.resp}/issues`;
+  const url = `/repos/${config.resp}/issues`;
   const headers = getHeaders();
-  return axiosGithub.get(GET_ALL_ISSUES, { headers });
+  return axiosGithub.get(url, { headers });
 };
 
 export const getSingleIssue = issue_number => {
-  const GET_SINGLE_ISSUES = `/repos/${config.resp}/issues/${issue_number}`;
+  const url = `/repos/${config.resp}/issues/${issue_number}`;
   const headers = getHeaders();
-  return axiosGithub.get(GET_SINGLE_ISSUES, { headers });
+  return axiosGithub.get(url, { headers });
 };
 
 export const getSingleIssueCommits = issue_number => {
-  const GET_SINGLE_ISSUES = `/repos/${config.resp}/issues/${issue_number}/comments`;
+  const url = `/repos/${config.resp}/issues/${issue_number}/comments`;
   const headers = getHeaders();
-  return axiosGithub.get(GET_SINGLE_ISSUES, { headers });
+  return axiosGithub.get(url, { headers });
 };
 export const createIssue = payload => {
-  const creaetIssueUrl = `/repos/${config.resp}/issues`;
+  const url = `/repos/${config.resp}/issues`;
   const headers = getHeaders();
-  return axiosGithub.post(creaetIssueUrl, payload, { headers });
+  return axiosGithub.post(url, payload, { headers });
 }
-
+export const updateIssue = payload => {
+  const url = `/repos/${config.resp}/issues/${payload.number}`;
+  const headers = getHeaders();
+  return axiosGithub.patch(url, payload, { headers });
+}
+export const createCommit = ({ number, body }) => {
+  const url = `/repos/${config.resp}/issues/${number}/comments`;
+  const headers = getHeaders();
+  return axiosGithub.post(url, { body }, { headers });
+}
+export const deleteCommit = commitId => {
+  const url = `/repos/${config.resp}/issues/comments/${commitId}`;
+  const headers = getHeaders();
+  return axiosGithub.delete(url, { headers });
+}
 export const accessToken = payload => {
   const accessTokenUrl =
     "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token";
